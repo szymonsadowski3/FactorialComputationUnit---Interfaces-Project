@@ -38,7 +38,7 @@ public class ResultsStorage implements Cache {
 	 */
 	ResultsStorage(int length) {
 		storage = new LinkedHashMap<Integer, BigInteger>(length);
-		storage.put(new Integer(3), new BigInteger("" + 6));
+		storage.put(new Integer(0), new BigInteger("" + 1));
 
 		storageSupremum = length;
 		currentSize = 1;
@@ -70,7 +70,7 @@ public class ResultsStorage implements Cache {
 	 *            result is index!
 	 */
 	public void storeResult(int index, BigInteger result) { //PRIORITIZING INSIDE
-		if (currentSize >= storageSupremum) {
+		if (isFull()) {
 			System.out.println("Cache is full! Removing least used element");
 			deleteLeastUsedResult();
 		}
@@ -129,5 +129,16 @@ public class ResultsStorage implements Cache {
 		int keyFirst;
 		keyFirst = storage.keySet().iterator().next();
 		storage.remove(keyFirst);
+		--currentSize;
+	}
+	
+	public long evaluateMemoryUsage() {
+		long suma = 0;
+		
+		for (BigInteger bigInt : storage.values()) {
+			suma += ObjectSizeFetcher.getObjectSize(bigInt);
+		}
+		
+		return suma;
 	}
 }
