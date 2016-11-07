@@ -6,9 +6,9 @@
 ##Program runs with 3 modes:
 -[Args in command line](#example-at-args-in-command-line-mode-1)
 
--[No args in command line & non-prioritization](#example-at-no-args-in-command-line-&-nonprioritization-mode-2)
+-[No args in command line & non-prioritization](#example-at-no-args-in-command-line-AND-nonprioritization-mode-2)
 
--[No args in command line & PRIORITIZATION](#example-at-no-args-in-command-line-&-PRIORITIZATION-mode-3)
+-[No args in command line & PRIORITIZATION](#example-at-no-args-in-command-line-AND-PRIORITIZATION-mode-3)
 
 ## Example at Args in command line mode 1
 
@@ -24,7 +24,7 @@
 
 101! = 9425947759838359420851623124482936749562312794702543768327889353416977599316221476503087861591808346911623490003549599583369706302603264000000000000000000000000
 
-## Example at No args in command line & nonprioritization mode 2
+## Example at No args in command line AND nonprioritization mode 2
 
 ### input
 
@@ -42,7 +42,7 @@
 
 5! = 120
 
-## Example at No args in command line & PRIORITIZATION mode 3
+## Example at No args in command line AND PRIORITIZATION mode 3
 
 ### input
 
