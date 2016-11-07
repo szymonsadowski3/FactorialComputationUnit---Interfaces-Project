@@ -12,16 +12,16 @@ import java.io.IOException;
  * @author szymon sadowski
  */
 public class Main {
-	static final int CAPACITY = 5;
 
 	public static void main(String[] args) throws IOException {
-		ProgramRunner runner = new ProgramRunner(new TaskQueue(CAPACITY), CAPACITY);
+		Config appConfig = new Config(5, 5);
+		ProgramRunner runner = new ProgramRunner(new TaskQueue(appConfig.getQueueCapacity()),
+				appConfig.getCacheCapacity());
 
 		if (args.length >= 1) {
 			runner.runWithArgs(args);
 		} else {
 			runner.runWithNoArgs();
-			// ProgramRunner.runWithArgsInFile("/tmp/factorial_args.txt");
 		}
 	}
 }

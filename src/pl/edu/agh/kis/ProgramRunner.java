@@ -20,17 +20,31 @@ public class ProgramRunner {
 	 * this field is used so to control prioritizations of computations
 	 */
 	ComputationsQueue queue;
-	
+
 	/**
 	 * this field is used so to perform factorial computations
 	 */
 	FactorialComputer computer;
 
+	/**
+	 * Parametrized constructor
+	 * 
+	 * @param queue_
+	 *            Object of class that represents ComputationsQueue interface
+	 * @param cacheCapacity
+	 *            Cache Capacity
+	 */
 	ProgramRunner(ComputationsQueue queue_, int cacheCapacity) {
 		queue = queue_;
 		computer = new FactorialComputer(cacheCapacity);
 	}
-	
+
+	/**
+	 * @param message
+	 *            String attached to result
+	 * @param result
+	 *            Result
+	 */
 	void printResult(String message, BigInteger result) {
 		System.out.println(message + result);
 	}
@@ -42,7 +56,7 @@ public class ProgramRunner {
 		System.out.println("---Type 1 if you do NOT want to prioritize your computations---");
 		System.out.println("---Type 2 if you DO want to prioritize your computations---");
 
-		int choice = InputParser.getUserInteger("");
+		int choice = Utility.getUserInteger("");
 
 		if (choice == 1) {
 			runWithoutPrioritization();
@@ -64,7 +78,7 @@ public class ProgramRunner {
 		System.out.println("Processing given arguments...");
 
 		for (int i = 0; i < args.length; ++i) {
-			int n = InputParser.parseString(args[i]);
+			int n = Utility.parseString(args[i]);
 			BigInteger result = computer.calculateFactorialReusingResult(n);
 			printResult((n + "! = "), result);
 		}
@@ -86,7 +100,7 @@ public class ProgramRunner {
 		String line;
 
 		while ((line = br.readLine()) != null) {
-			int arg = InputParser.parseString(line);
+			int arg = Utility.parseString(line);
 			BigInteger result = computer.calculateFactorialReusingResult(arg);
 			printResult((arg + "! = "), result);
 		}
@@ -94,14 +108,14 @@ public class ProgramRunner {
 	}
 
 	/**
-	 * Method called when User did NOT choose Prioritization
+	 * Method called when User did NOT choose Prioritization mode
 	 */
 	void runWithoutPrioritization() {
 		System.out.println("You run NO-Prioritize option. Type in positive numbers to calculate their factorials.");
 		System.out.println("If you type in anything else, you will exit the program.");
 
 		for (;;) {
-			int n = InputParser.getUserInteger("Type: ");
+			int n = Utility.getUserInteger("Type: ");
 
 			if (n < 0) {
 				System.out.println("Thanks for using this program...");
@@ -125,7 +139,7 @@ public class ProgramRunner {
 		System.out.println("For example if 0 150 is typed in, 150! will always be computed as the first.");
 
 		for (;;) {
-			Pair toAdd = InputParser.getPair("");
+			Pair toAdd = Utility.getPair("");
 
 			if ((toAdd.getFirst() < 0) && (toAdd.getFirst() < 0))
 				break;
