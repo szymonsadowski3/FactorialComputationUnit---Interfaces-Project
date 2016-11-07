@@ -82,7 +82,6 @@ public class ResultsStorage implements Cache {
 			storage.remove(index);
 			storage.put(index, result);
 		}
-		print();
 	}
 
 	/**

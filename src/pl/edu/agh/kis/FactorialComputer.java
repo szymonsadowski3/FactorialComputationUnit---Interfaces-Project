@@ -6,6 +6,7 @@ import Interfaces.Cache;
 
 /**
  * Class FactorialComputer which performs Factorials Computations (n!=?)
+ * 
  * @author szymon
  *
  */
@@ -14,11 +15,11 @@ public class FactorialComputer {
 	 * Computed results are stored here so to reuse them in future
 	 */
 	Cache cache;
-	
+
 	FactorialComputer(int cacheCapacity) {
 		cache = new ResultsStorage(cacheCapacity);
 	}
-	
+
 	/**
 	 * @param index
 	 *            Given index. In its left neighborhood results will be searched
