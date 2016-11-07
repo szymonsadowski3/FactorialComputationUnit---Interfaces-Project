@@ -4,11 +4,12 @@
 ##Computation Unit which calculates Factorials (homework)
 
 ##Program runs with 3 modes:
--[Args in command line](#example-at-args-in-command-line-mode-1)
 
--[No args in command line & non-prioritization](#example-at-no-args-in-command-line--non-prioritization-mode-2)
+* [Args in command line](#example-at-args-in-command-line-mode-1)
 
--[No args in command line & PRIORITIZATION](#example-at-no-args-in-command-line--prioritization-mode-3)
+* [No args in command line & non-prioritization](#example-at-no-args-in-command-line--non-prioritization-mode-2)
+
+* [No args in command line & PRIORITIZATION](#example-at-no-args-in-command-line--prioritization-mode-3)
 
 ## Example at [Args in command line] mode 1
 
