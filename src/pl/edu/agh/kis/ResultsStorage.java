@@ -1,5 +1,6 @@
 package pl.edu.agh.kis;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Map;
 import java.util.ArrayList;
@@ -56,9 +57,11 @@ public class ResultsStorage implements Cache {
 
 	/**
 	 * @return 1 if Storage is full, 0 otherwise
+	 * @throws IOException
 	 */
 	public boolean isFull() {
-		return (currentSize == storageSupremum);
+		// return (currentSize == storageSupremum);
+		return (evaluateMemoryUsage() > storageSupremum);
 	}
 
 	/**
@@ -69,12 +72,14 @@ public class ResultsStorage implements Cache {
 	 * @param result
 	 *            result is index!
 	 */
-	public void storeResult(int index, BigInteger result) { //PRIORITIZING INSIDE
+	public void storeResult(int index, BigInteger result) { // PRIORITIZING
+															// INSIDE
 		if (isFull()) {
 			System.out.println("Cache is full! Removing least used element");
 			deleteLeastUsedResult();
+			storeResult(index, result);
 		}
-		
+
 		if (!containsIndex(index)) {
 			storage.put(index, result);
 			currentSize++;
@@ -87,7 +92,7 @@ public class ResultsStorage implements Cache {
 	/**
 	 * this method returns Result previously computed for given index
 	 */
-	public BigInteger getResult(int index) { //PRIORITIZING INSIDE
+	public BigInteger getResult(int index) { // PRIORITIZING INSIDE
 		BigInteger result = storage.get(index);
 		storage.remove(index);
 		storage.put(index, result);
@@ -112,18 +117,18 @@ public class ResultsStorage implements Cache {
 			System.out.println(key + " " + value);
 		}
 	}
-	
-	/* 
+
+	/*
 	 * This method removes all results from cache (cache is re-constructed)
 	 */
 	public void clearCache() {
 		storage = new LinkedHashMap<Integer, BigInteger>(storageSupremum);
-		storage.put(new Integer(3), new BigInteger("" + 6));
+		storage.put(new Integer(0), new BigInteger("" + 1));
 		currentSize = 1;
 	}
-	
+
 	/**
-	 *  This method removes this result from cache which was the least used 
+	 * This method removes this result from cache which was the least used
 	 */
 	public void deleteLeastUsedResult() {
 		int keyFirst;
@@ -131,14 +136,23 @@ public class ResultsStorage implements Cache {
 		storage.remove(keyFirst);
 		--currentSize;
 	}
-	
+
+	/**
+	 * Get overall memory used by Cache
+	 * 
+	 * @return Memory usage of cache in bytes
+	 */
 	public long evaluateMemoryUsage() {
 		long suma = 0;
-		
+
 		for (BigInteger bigInt : storage.values()) {
-			suma += ObjectSizeFetcher.getObjectSize(bigInt);
+			try {
+				suma += Utility.sizeof(bigInt);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 		return suma;
 	}
 }
