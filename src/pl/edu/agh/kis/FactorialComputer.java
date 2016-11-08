@@ -16,8 +16,31 @@ public class FactorialComputer {
 	 */
 	Cache cache;
 
+	/**
+	 * Parametrized constructor
+	 * 
+	 * @param cacheCapacity
+	 *            cache capacity in bytes
+	 */
 	FactorialComputer(int cacheCapacity) {
 		cache = new ResultsStorage(cacheCapacity);
+	}
+
+	/**
+	 * Calculates Factorial from scratch
+	 * 
+	 * @param n
+	 *            n to calculate n!
+	 * @return n!
+	 */
+	public static BigInteger calculateFactorial(int n) {
+		BigInteger result = new BigInteger("1");
+
+		for (int i = 2; i <= n; ++i) {
+			result = result.multiply(new BigInteger("" + i));
+		}
+
+		return result;
 	}
 
 	/**
@@ -31,7 +54,7 @@ public class FactorialComputer {
 				return i;
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -41,6 +64,10 @@ public class FactorialComputer {
 	 */
 	BigInteger getNearestResultBelowGivenIndex(int index) {
 		int bestIndex = findNearestResultBelowGivenIndex(index);
+
+		if (bestIndex == -1)
+			return new BigInteger(0 + "");
+
 		return cache.getResult(bestIndex);
 	}
 
@@ -80,6 +107,9 @@ public class FactorialComputer {
 		BigInteger storedResult = new BigInteger("0");
 		storedResult = getNearestResultBelowGivenIndex(n);
 		int storedResultIndex = findNearestResultBelowGivenIndex(n);
+
+		if (storedResultIndex == -1)
+			return calculateFactorial(n);
 
 		BigInteger result = calculateFactorialReusingResult(storedResultIndex, n, storedResult);
 
