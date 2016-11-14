@@ -118,4 +118,24 @@ public class Utility {
 
 		return (new Pair(f, s));
 	}
+
+	/**
+	 * Method to approximate memory usage of an Object
+	 * 
+	 * @param obj
+	 *            Object
+	 * @return Memory usage of obj
+	 * @throws IOException
+	 */
+	public static long sizeof(Object obj) throws IOException {
+
+		ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteOutputStream);
+
+		objectOutputStream.writeObject(obj);
+		objectOutputStream.flush();
+		objectOutputStream.close();
+
+		return byteOutputStream.toByteArray().length;
+	}
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		Config appConfig = new Config(5, 5);
+		Config appConfig = new Config(5, 900);
 		ProgramRunner runner = new ProgramRunner(new TaskQueue(appConfig.getQueueCapacity()),
 				appConfig.getCacheCapacity());
 
